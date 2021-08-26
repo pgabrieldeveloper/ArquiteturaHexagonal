@@ -5,16 +5,17 @@ import com.testeGubee.testeGubee.products.entities.Product
 import com.testeGubee.testeGubee.products.services.FindByStack
 import com.testeGubee.testeGubee.products.services.FindByTargetMarket
 import com.testeGubee.testeGubee.products.services.FindByTargetMarketAndStack
+import com.testeGubee.testeGubee.products.services.GetAllProducts
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
 @RequestMapping("/product")
-class ProductController(private val serviceFindByStack:FindByStack, private val serviceFindByTargetMarket: FindByTargetMarket, private val serviceserviceFindByTargetMarketAndStack: FindByTargetMarketAndStack) {
+class ProductController(private val serviceFindByStack:FindByStack,
+                        private val serviceFindByTargetMarket: FindByTargetMarket,
+                        private val serviceserviceFindByTargetMarketAndStack: FindByTargetMarketAndStack,
+                        private val serviceAllProduct: GetAllProducts) {
 
     @PostMapping("findByStack")
     fun findByStack(@RequestBody parametersFinds: ParametersFinds):ResponseEntity<List<Product>>{
@@ -29,6 +30,11 @@ class ProductController(private val serviceFindByStack:FindByStack, private val 
     @PostMapping("findByTargetMarketAndStack")
     fun findByTargetMarketAndStack(@RequestBody parametersFinds: ParametersFinds): ResponseEntity<List<Product>>{
         return ResponseEntity.ok(serviceserviceFindByTargetMarketAndStack.find(parametersFinds))
+    }
+
+    @GetMapping
+    fun getAllProducts(): ResponseEntity<List<Product>>{
+        return ResponseEntity.ok(serviceAllProduct.getAll())
     }
 
 }
