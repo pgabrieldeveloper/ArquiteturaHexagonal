@@ -1,16 +1,18 @@
 package com.testeGubee.testeGubee.products.services
 
+import com.testeGubee.testeGubee.products.Dtos.ParametersFinds
 import com.testeGubee.testeGubee.products.entities.Product
 import com.testeGubee.testeGubee.products.interfaces.Finds
 import com.testeGubee.testeGubee.products.repository.ProductRepository
+import org.springframework.stereotype.Service
 
+@Service
 class FindByStack(private val repository: ProductRepository): Finds {
-    override fun find(val stacks:List<String> ): List<Product> {
-        val listProducs:List<Product> =  this.repository.findAll();
 
-      
+    override fun find(parametersFinds: ParametersFinds): List<Product> {
+        val listProducts:List<Product> = this.repository.findAll();
+        return listProducts.filter { Contains.contains(parametersFinds.stack, it.stack)};
     }
 
+
 }
-
-
