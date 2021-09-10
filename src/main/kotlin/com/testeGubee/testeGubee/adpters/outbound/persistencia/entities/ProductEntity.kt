@@ -1,10 +1,11 @@
-package com.testeGubee.testeGubee.products.entities
+package com.testeGubee.testeGubee.adpters.outbound.persistencia.entities
 
+import com.testeGubee.testeGubee.core.domain.Product
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
-class Product (
+class ProductEntity (
     @Id
     var productId: String,
     var productName: String,
@@ -13,9 +14,11 @@ class Product (
     var stack: List<String>
 ){
     constructor(): this("","","",emptyList(),emptyList())
+
+   fun toDomain(): Product {
+    return Product(this.productId, this.productName,this.description,this.targetMarket,this.stack);
+   }
 }
-
-
 
 
 
