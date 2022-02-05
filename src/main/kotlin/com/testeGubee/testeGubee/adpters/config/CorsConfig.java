@@ -1,4 +1,4 @@
-package com.testeGubee.testeGubee.config;
+package com.testeGubee.testeGubee.adpters.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
